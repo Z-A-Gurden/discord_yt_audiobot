@@ -18,6 +18,8 @@ You will then need to create a '.env' in the same directory as 'ytbot.js' and ty
 APP_TOKEN=your_key_here
 ```
 
+THERE IS MORE TO BE ADDED TO USAGE SUCH AS CLIENT AND POSSIBLY GUILD ID
+
 Then start the application.
 
 ## Requirements
