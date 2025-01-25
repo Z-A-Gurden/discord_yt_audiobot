@@ -6,7 +6,7 @@ A simple bot for playing audio from youtube in your discord voice channel.
 
 # Usage
 
-First, donwload the repository through the cli:
+First, download the repository through the cli:
 ```
 git clone PLACEHOLDER FOR URL - CHANGE LATER
 ```
