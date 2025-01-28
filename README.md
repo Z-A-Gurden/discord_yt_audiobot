@@ -33,7 +33,7 @@ node ytbot.js
 
 ## Requirements
 
-Modules [discord.js](https://www.npmjs.com/package/discord.js?activeTab=readme), [@discordjs/voice](https://www.npmjs.com/package/@discordjs/voice), [dotenv](https://www.npmjs.com/package/dotenv), and [@distube/ytdl-core](https://www.npmjs.com/package/@distube/ytdl-core) are required.
+Dependencies can be observed within package.json.
 
 To install with npm simply type in the cli within the app directory:
 ```
