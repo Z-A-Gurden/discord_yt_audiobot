@@ -1,4 +1,4 @@
-// Website used to help create this structure is https://discordjs.guide/#before-you-begin
+// Code mostly via https://discordjs.guide/#before-you-begin
 require('dotenv').config();
 
 // Loads command files in commands/utility
@@ -9,7 +9,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 // If you don't want to use the env file for your token, then you can paste it here, just don't share it
 const token = process.env.APP_TOKEN;
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 // Part of loading the commands
 client.commands = new Collection();
@@ -56,7 +56,6 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 });
-
 
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
