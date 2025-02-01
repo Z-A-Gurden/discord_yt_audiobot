@@ -1,12 +1,15 @@
 const { SlashCommandBuilder, MessageFlags, ConnectionService} = require('discord.js');
-const { queue } = require('./play')
+const queuesModule = require('../../queues')
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('list-queue')
 		.setDescription('List the contents of the audio queue'),
 	async execute(interaction) {
-        if(queue.length == 0){
+        const channelId = interaction.member.voice.channel.id;
+        const queue = queuesModule.queues.get(channelId);
+        // checks if undefined first, because if it is the other way round it complains about length being undefined
+        if(typeof(queue) === 'undefined' || queue.length == 0){
             await interaction.reply('No audio queued.')
             return console.log("'list-queue': No songs in queue; reply sent.")
         }

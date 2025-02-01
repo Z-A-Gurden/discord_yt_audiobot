@@ -1,17 +1,19 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const { player, queue } = require('./play');
+const playersModule = require('../../players');
 
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('skip')
-		.setDescription('Skip current audio in queue'),
+		.setDescription('Skip current audio in queue. If no queue is present, the audio will just end instead'),
 	async execute(interaction){
-		// If no song is next in queue then a reply will be and no action will be taken, otherwise stop current audio, therefore skipping.
-        if(queue.length == 0){
-			await interaction.reply({content: 'No other songs in queue to skip too.', flags: MessageFlags.Ephemeral});
-            return console.log("'skip': No songs to skip too; reply sent.")
-        }
+		channelId = interaction.member.voice.channel.id;
+        // Note: Add check for if a suitable player does not exist.
+        const player = playersModule.players.get(channelId);
+		if(typeof(player) === 'undefined'){
+			await interaction.reply({content: 'No audio player exists, try playing some audio first.', flags: MessageFlags.Ephemeral});
+			return console.log("'skip': Attempted skip with no player present; reply sent");
+		}
 		player.stop();
 		await interaction.reply('Skipping current audio.');
         console.log("'skip': Skipped song; reply sent.");

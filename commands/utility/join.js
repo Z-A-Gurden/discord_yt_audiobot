@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, MessageFlags} = require('discord.js');
-const {joinVoiceChannel} = require('@discordjs/voice')
+const { joinVoiceChannel } = require('@discordjs/voice')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,7 +8,7 @@ module.exports = {
     async execute(interaction){
 
         if (!interaction.member.voice.channel){
-            interaction.reply({content: 'User is not in a voice channel.', flags: MessageFlags.Ephemeral})
+            await interaction.reply({content: 'User is not in a voice channel.', flags: MessageFlags.Ephemeral})
             return console.log("'join': User not in channel; reply sent.");
         }
         const connection = joinVoiceChannel({

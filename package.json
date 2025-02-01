@@ -4,6 +4,7 @@
     "@distube/ytdl-core": "^4.15.9",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
-    "libsodium-wrappers": "^0.7.15"
+    "libsodium-wrappers": "^0.7.15",
+    "youtube-sr": "^4.3.11"
   }
 }
