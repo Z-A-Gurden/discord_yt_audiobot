@@ -1,25 +1,27 @@
 # A Youtube Audio Bot For Discord
 
 NOTES:
-- Major issue where audio randomly cuts, chances of it happening and when it happens within a video varies even when playing the same audio. There is error catching in place to prevent crash and move on to
-  the next song.
-- This is a project for learning, fun, and mainly personal use. Don't expect a high quality program, because it is not.
+- Major issue where audio randomly cuts, chances of it happening and when it happens within a video varies even when playing the same audio. There is error catching in place to prevent a crash and move onto the next song in queue if there is any.
+- This is a project for learning, fun, and mainly personal use. Don't expect a high quality program.
 
 A simple bot for playing audio from youtube in your discord voice channel.
 
 # Usage
 
-First, download the repository through the cli:
+First, download the repository:
 ```
 git clone https://github.com/Z-A-Gurden/discord_yt_audiobot.git
 ```
 
-Create the discord app for personal use, you can find instructions on the [discord developer portal](https://discord.com/developers/docs/quick-start/getting-started#step-1-creating-an-app).
+Create a discord app in the discord developer portal, you can find instructions on the [discord developer portal](https://discord.com/developers/docs/quick-start/getting-started#step-1-creating-an-app).
 
 You will then need to create a '.env' in the same directory as 'ytbot.js' and type into it:
 ```
 APP_TOKEN=your_key_here
+CLIENT_ID=your_key_here
 ```
+
+You can find both of these after creating your discord app.
 
 You will then need to register the slash commands using the deploy-commands.js file provided, run:
 ```
