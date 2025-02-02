@@ -1,4 +1,5 @@
 // Code via https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
+// edited it a bit so that it works with dotenv rather than json
 
 const { REST, Routes } = require('discord.js');
 require('dotenv').config();

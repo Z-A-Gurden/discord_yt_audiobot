@@ -10,7 +10,6 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const token = process.env.APP_TOKEN;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
-
 // Part of loading the commands
 client.commands = new Collection();
 
