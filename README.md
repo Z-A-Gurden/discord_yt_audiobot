@@ -1,33 +1,43 @@
 # A Youtube Audio Bot For Discord
 
-NOTE: while this note exists the project does not work and is a wip
+NOTES:
+- Major issue where audio randomly cuts, chances of it happening and when it happens within a video varies even when playing the same audio. There is error catching in place to prevent a crash and move onto the next song in queue if there is any.
+- This is a project for learning, fun, and mainly personal use. Don't expect a high quality program.
 
 A simple bot for playing audio from youtube in your discord voice channel.
 
 # Usage
 
-First, download the repository through the cli:
+First, download the repository:
 ```
-git clone PLACEHOLDER FOR URL - CHANGE LATER
+git clone https://github.com/Z-A-Gurden/discord_yt_audiobot.git
 ```
 
-Create the discord app for personal use, you can find instructions on the [discord developer portal](https://discord.com/developers/docs/quick-start/getting-started#step-1-creating-an-app).
+Create a discord app in the discord developer portal, you can find instructions on the [discord developer portal](https://discord.com/developers/docs/quick-start/getting-started#step-1-creating-an-app).
 
 You will then need to create a '.env' in the same directory as 'ytbot.js' and type into it:
 ```
 APP_TOKEN=your_key_here
+CLIENT_ID=your_key_here
 ```
 
-Then start the application.
+You can find both of these after creating your discord app.
+
+You will then need to register the slash commands using the deploy-commands.js file provided, run:
+```
+node deploy-commands.js
+```
+
+Then start the application by running:
+```
+node ytbot.js
+```
 
 ## Requirements
 
-Modules [discord.js](https://www.npmjs.com/package/discord.js?activeTab=readme) and [dotenv](https://www.npmjs.com/package/dotenv) are required.
+Dependencies can be observed within package.json.
 
-To install with npm simply type in the cli:
+To install with npm simply type in the cli within the app directory:
 ```
-npm install discord.js dotenv
+npm install .
 ```
-
-### Why These Dependencies?
-discord.js is of course for interacting with the discord api in js, dotenv is for making it easier to access environment variables from your .env file (where the app token is stored and accessed from).
