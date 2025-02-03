@@ -9,8 +9,8 @@ module.exports = {
         .setDescription('Joins the user\'s voice channel'),
     async execute(interaction){
         if (!interaction.member.voice.channel){
-            await interaction.reply({content: 'User is not in a voice channel.', flags: MessageFlags.Ephemeral})
-            return console.log("'join': User not in channel; reply sent.");
+            await interaction.reply({content: 'User is not in a voice channel', flags: MessageFlags.Ephemeral})
+            return console.log("'join': User not in channel; reply sent");
         }
         const connection = joinVoiceChannel({
             channelId: interaction.member.voice.channel.id,
@@ -19,6 +19,6 @@ module.exports = {
             selfDeaf: true
         });
         await interaction.reply({content: 'Joined voice channel', flags: MessageFlags.Ephemeral})
-        console.log("'join': Connection to channel established; reply sent.")
+        console.log("'join': Connection to channel established; reply sent")
     }
 }
