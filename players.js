@@ -1,9 +1,6 @@
 const { createAudioPlayer } = require('@discordjs/voice');
 
-// Delete below if given up on class implementation of this file
-// Comment out below to use bot whilst below is not finished
-// Purpose: Directly link players and queues. maybe make a player object with .queue member.
-
+// Class with a map of all players, and a way to access or add to them
 class Players{
     static #players = new Map();
     static addPlayer(channelId){
@@ -19,7 +16,7 @@ class Players{
         return Players.#players.get(channelId);
     }
 }
-
+// The class of a player held in #players in Players, holds the queue for that player, and offers various functions in relation to the functioning of the player
 class Player{
     #player;
     #queue = [];
@@ -29,13 +26,14 @@ class Player{
         this.#player = createAudioPlayer();
         this.#channelId = channelId;
     }
+    
+    // Getters annd Setters
+    getState(){ return this.#player.state.status; }
+    getQueue(){ return this.#queue; }
+    addToQueue(url){ this.#queue.push(url); }
+    clearQueue(){ this.#queue.length = 0; }
 
-    getState(){
-        return this.#player.state.status;
-    }
-    play(resource){
-        this.#player.play(resource);
-    }
+    play(resource){ this.#player.play(resource); }
     pause(){
         if(this.getState() === 'playing'){
             this.#player.pause();
@@ -47,9 +45,7 @@ class Player{
         }
         return 'Player idle';
     }
-    skip(){
-        this.#player.stop();
-    }
+    skip(){this.#player.stop();}
     stop(){
         this.clearQueue();
         this.#player.stop();
@@ -64,20 +60,8 @@ class Player{
             throw(error);
         }
     }
-    // temp function for use with listeners, replace with different solution later
-    getPlayer(){
-        return this.#player;
-    }
-
-    addToQueue(url){
-        this.#queue.push(url);
-    }
-    getQueue(){
-        return this.#queue;
-    }
-    clearQueue(){
-        this.#queue.length = 0;
-    }
+    // temp function for use with listeners, replace with different solution later as the player shouldn't really be accessible
+    getPlayer(){return this.#player;}
 }
 
 module.exports = Players;
