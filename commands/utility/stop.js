@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { getVoiceConnection } = require('@discordjs/voice');
-const playersModule = require('../../players');
-const queuesModule = require('../../queues');
+const Players = require('../../players');
 
 // Stops the player, clearing queue in the process, leaves channel
 module.exports = {
@@ -15,8 +14,7 @@ module.exports = {
 		}
 		const channelId = interaction.member.voice.channel.id;
 		
-		queuesModule.queues.delete(channelId);
-		playersModule.players.delete(channelId);
+		const player = Players.getPlayer(channelId).stop();
 
 		connection = getVoiceConnection(interaction.guild.id);
 		if(typeof(connection) === 'undefined'){

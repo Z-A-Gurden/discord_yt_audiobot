@@ -30,7 +30,7 @@ node deploy-commands.js
 
 Then start the application by running:
 ```
-node ytbot.js
+node index.js
 ```
 
 ## Requirements
