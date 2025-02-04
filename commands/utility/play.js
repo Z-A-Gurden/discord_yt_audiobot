@@ -75,7 +75,7 @@ module.exports = {
 async function playQueue(interaction){
     // Check if queue is empty, prevents more recursive calls for no reason
     if(player.getQueue().length === 0){
-        await interaction.followUp('**No more audio to play**')
+        await interaction.channel.send('**No more audio to play**')
         return console.log("'play/playQueue': No more audio in queue; returned to caller and reply sent.");
     }
 
@@ -85,12 +85,12 @@ async function playQueue(interaction){
     const resource = createAudioResource(stream);
     player.play(resource);
 
-    await interaction.followUp(`Playing audio: ${url}`);
+    await interaction.channel.send(`Playing audio: ${url}`);
     console.log("'play/playQueue': Playing audio; reply sent.");
 
     player.getPlayer().on('error', error => {
         console.log(`[ERROR] 'play/playQueue': ${error.message}`);
-        interaction.followUp('**An error occured with the current audio, skipping to next.**');
+        interaction.channel.send('**An error occured with the current audio, skipping to next.**');
         console.log("'play/playQueue': Recovering from error, moving to next queue item.");
         playQueue(interaction);
     });
