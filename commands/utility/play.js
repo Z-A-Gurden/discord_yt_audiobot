@@ -18,8 +18,11 @@ module.exports = {
                 .setRequired(true)
         ),
 	async execute(interaction){
+
+            await interaction.deferReply();
+
         if(!interaction.member.voice.channel){
-            await interaction.reply({content: 'User is not in a voice channel', flags: MessageFlags.Ephemeral});
+            await interaction.editReply({content: 'User is not in a voice channel', flags: MessageFlags.Ephemeral});
             return console.log("'play': User not in a voice channel, no connection established; reply sent");
         }
 
@@ -38,7 +41,7 @@ module.exports = {
         try{
             player.subscribe(connection);
         } catch(error){
-            await interaction.reply({content: error, flags: MessageFlags.Ephemeral});
+            await interaction.editReply({content: error, flags: MessageFlags.Ephemeral});
             return console.log(`'play': ${error}; reply sent`);
         }
 
@@ -49,7 +52,7 @@ module.exports = {
         if(!ytdl.validateURL(url)){
             const result = await ytSearch.search(url, {limit: 1});
             if(result.length === 0){
-                await interaction.reply({content: 'No audio found.', flags: MessageFlags.Ephemeral});
+                await interaction.editReply({content: 'No audio found.', flags: MessageFlags.Ephemeral});
                 return console.log(`'play': No suitable video found for query: '${url}'`)
             }
             url = result[0].url;
@@ -61,7 +64,7 @@ module.exports = {
 
         player.addToQueue(url);
 
-        await interaction.reply(`Added to queue: ${title}`);
+        await interaction.editReply(`Added to queue: ${title}`);
         console.log(`'play': Added URL to queue: reply sent.\nQueue contents: ${player.getQueue()}`)
         
         // If the player is playing, a user calling the play command won't cause the current audio to stop playing to make way for the next
