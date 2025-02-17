@@ -83,9 +83,10 @@ async function playQueue(interaction){
 
     // Create an audio resource for the player to play from the url
     const url = player.getQueue().shift();
+    let stream;
     try{
     // Added highwatermark to possibly reduce stuttering if it exists, also tried to remove TimeNegativeWarning warnings but did not work
-    const stream = ytdl(url, {filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25});
+    stream = ytdl(url, {filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25});
     } catch(error){
         console.log(error);
     }
