@@ -5,6 +5,7 @@
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "libsodium-wrappers": "^0.7.15",
+    "undici": "^7.3.0",
     "youtube-sr": "^4.3.11"
   }
 }
