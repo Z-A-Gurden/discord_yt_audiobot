@@ -64,12 +64,12 @@ module.exports = {
         player.addToQueue(url);
 
         await interaction.editReply(`Added to queue: ${title}`);
-        console.log(`'play': Added URL to queue: reply sent.\nQueue contents: ${player.getQueue()}`)
+        console.log(`'play': Added URL to queue: reply sent.\nQueue contents: ${player.getQueue()}`);
         
         // If the player is playing, a user calling the play command won't cause the current audio to stop playing to make way for the next
         // Queued tracks are played next/handled in playQueue
         if(player.getState() !== 'playing'){
-            playQueue(interaction)
+            playQueue(interaction);
         }
     }}
 
@@ -93,7 +93,7 @@ async function playQueue(interaction){
     const resource = createAudioResource(stream);
     player.play(resource);
 
-    // Removes previous players, solves memory leak and prevents reaching max listener limit (causin a crash)
+    // Removes previous players, solves memory leak and prevents reaching max listener limit (causing a crash), should also prevent error spam after many songs had already played
     player.getPlayer().removeAllListeners('error');
     player.getPlayer().removeAllListeners(AudioPlayerStatus.Idle);
 
