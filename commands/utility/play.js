@@ -33,7 +33,6 @@ module.exports = {
             adapterCreator: interaction.guild.voiceAdapterCreator,
             selfDeaf: true
         });
-        console.log("'play': Channel connection established or verified");
 
         Players.addPlayer(channelId);
         player = Players.getPlayer(channelId);
@@ -78,15 +77,24 @@ module.exports = {
 async function playQueue(interaction){
     // Check if queue is empty, prevents more recursive calls for no reason
     if(player.getQueue().length === 0){
-        await interaction.channel.send('**No more audio to play**')
+        await interaction.channel.send('No more audio to play')
         return console.log("'play/playQueue': No more audio in queue; returned to caller and reply sent.");
     }
 
     // Create an audio resource for the player to play from the url
     const url = player.getQueue().shift();
-    const stream = ytdl(url, {filter: 'audioonly', quality: 'highestaudio'});
+    try{
+    // Added highwatermark to possibly reduce stuttering if it exists, also tried to remove TimeNegativeWarning warnings but did not work
+    const stream = ytdl(url, {filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25});
+    } catch(error){
+        console.log(error);
+    }
     const resource = createAudioResource(stream);
     player.play(resource);
+
+    // Removes previous players, solves memory leak and prevents reaching max listener limit (causin a crash)
+    player.getPlayer().removeAllListeners('error');
+    player.getPlayer().removeAllListeners(AudioPlayerStatus.Idle);
 
     await interaction.channel.send(`Playing audio: ${url}`);
     console.log("'play/playQueue': Playing audio; reply sent.");

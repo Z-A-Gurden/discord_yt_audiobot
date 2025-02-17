@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
-    "@distube/ytdl-core": "^4.16.3",
+    "@distube/ytdl-core": "^4.16.4",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "libsodium-wrappers": "^0.7.15",
