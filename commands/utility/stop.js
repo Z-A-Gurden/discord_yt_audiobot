@@ -13,8 +13,8 @@ module.exports = {
 			return console.log("'stop': User attempted to stop player whilst not in a voice channel; reply sent.");
 		}
 		const channelId = interaction.member.voice.channel.id;
-		
-		const player = Players.getPlayer(channelId).stop();
+		 
+		Players.getPlayer(channelId).stop();
 
 		connection = getVoiceConnection(interaction.guild.id);
 		if(typeof(connection) === 'undefined'){
