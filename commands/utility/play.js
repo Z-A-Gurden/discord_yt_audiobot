@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const {joinVoiceChannel, getVoiceConnection, AudioPlayerStatus, createAudioPlayer, createAudioResource} = require('@discordjs/voice')
+const {joinVoiceChannel, getVoiceConnection, AudioPlayerStatus, createAudioPlayer, createAudioResource} = require('@discordjs/voice');
 const ytdl = require('@distube/ytdl-core');
 const ytSearch = require('youtube-sr').default;
 const Players = require('../../players');
@@ -64,7 +64,6 @@ module.exports = {
         player.addToQueue(url);
 
         await interaction.editReply(`Added to queue: ${title}`);
-        console.log(`'play': Added URL to queue: reply sent.\nQueue contents: ${player.getQueue()}`);
         
         // If the player is playing, a user calling the play command won't cause the current audio to stop playing to make way for the next
         // Queued tracks are played next/handled in playQueue
@@ -98,7 +97,6 @@ async function playQueue(interaction){
     player.getPlayer().removeAllListeners(AudioPlayerStatus.Idle);
 
     await interaction.channel.send(`Playing audio: ${url}`);
-    console.log("'play/playQueue': Playing audio; reply sent.");
 
     player.getPlayer().on('error', error => {
         console.log(`[ERROR] 'play/playQueue': ${error.message}`);
